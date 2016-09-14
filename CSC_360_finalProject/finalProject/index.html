@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="webOrganizer">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+        <title>Web Organizer</title>
+    </head>
+
+    <body ng-controller="ScrapeController as sc">
+        <header><h1 align="center">Web Organizer</h1></header>
+
+        Enter a URL:<input type="text" id = "address1" ng-model='address' align="center">
+        <button ng-click="doScrape()">Organize</button>
+        <div class = "list-group">
+            <div class = "list-group-item">
+                <h2>Images:</h2>
+                <a ng-repeat= "image in sc.imageArray track by $index" href="{{image}}" target = "_blank">
+                    <img  ng-src="{{image}}">
+                </a>
+            </div>
+            <div class = "list-group-item">
+                <h2>Text:</h2>
+                {{sc.text}}
+            </div>
+            <div class = "list-group-item">
+                <h2>Video:</h2>
+                <div ng-repeat= "video in sc.videosArray">
+                    <video ng-src="{{video.src}}"></video>
+                </div>
+            </div>
+            <div class = "list-group-item">
+                <h2>Audio:</h2>
+                <div ng-repeat= "audio in sc.audioArray">
+                    <audio ng-src="http:{{audio.src}}"></audio>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
