@@ -4,6 +4,10 @@
  * Luke Fischer lfischer
  *
  */
+ 
+/* NOTE: Written as a part of a computer systems class this C program is supposed to manage
+job control between the background and foreground.  Much of the methods were prewritten, but I have marked the places where I authored
+the methods*/
 
 /* With glibc, in order to call getpgid, define these: */
 #define _XOPEN_SOURCE 600
@@ -61,6 +65,8 @@ struct job_t jobs[MAXJOBS]; /* The job list */
 /* Function prototypes */
 
 /* Here are the functions that you will implement */
+
+/*!!!!!THESE METHODS ARE AUTHORED BY LUKE FISCHER!!!!*/
 void eval(char *cmdline);
 int builtin_cmd(char **argv);
 void do_bgfg(char **argv);
@@ -194,6 +200,8 @@ int main(int argc, char **argv)
  * when we type ctrl-c (ctrl-z) at the keyboard. Only the foreground process
  * group should receive those signals.
 */
+
+/*!!!!EVAL METHOD AUTHORED BY LUKE FISCHER!!!!*/
 void eval(char *cmdline) 
 {
   char *argv[MAXARGS];
@@ -320,6 +328,7 @@ int parseline(const char *cmdline, char **argv)
  * builtin_cmd - If the user has typed a built-in command then execute
  *    it immediately.  
  */
+ /*!!!!BUILTIN_CMD METHOD AUTHORED BY LUKE FISCHER!!!!*/
 int builtin_cmd(char **argv) 
 {
   if (!strcmp("quit", argv[0])){exit(0);}
@@ -341,6 +350,7 @@ int builtin_cmd(char **argv)
 /* 
  * do_bgfg - Execute the builtin bg and fg commands
  */
+  /*!!!!DO_BGFG METHOD AUTHORED BY LUKE FISCHER!!!!*/
 void do_bgfg(char **argv) 
 {
   //the id may be a PID or a JID
@@ -399,6 +409,7 @@ void do_bgfg(char **argv)
  * Wait 1 sec and check the state again. Keep waiting for 1 sec and 
  * checking the state until the state is not FG. 
  */
+ /*!!!!WAITFG METHOD AUTHORED BY LUKE FISCHER!!!!		Only the most impressive of methods!*/
 void waitfg(pid_t pid)
 {
   //wait till the program is out of the fg
@@ -416,6 +427,7 @@ void waitfg(pid_t pid)
  *     available zombie children, but doesn't wait for any other
  *     currently running children to terminate.  
  */
+  /*!!!!SIGCHILD_HANDLER METHOD AUTHORED BY LUKE FISCHER!!!!*/
 void sigchld_handler(int sig) 
 {
   int status;  
